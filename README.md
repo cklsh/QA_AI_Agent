@@ -34,7 +34,7 @@ Optional:
 
 ## Run
 ```bash
-ollama pull qwen2.5:7b
+ollama pull qwen2.5:3b
 pip install ollama pydantic faiss-cpu sentence-transformers
 python main.py
 ```
