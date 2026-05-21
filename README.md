@@ -1,6 +1,6 @@
 # AI QA Agent (Runs Locally)
 A mini project that converts PRDs into test cases and Playwright automation code.
-Runs fully locally using Ollama
+Runs fully locally using Ollama 
 ---
 
 ## What it does
