@@ -1,0 +1,9 @@
+ollama
+pydantic
+faiss-cpu
+sentence-transformers
+fastapi
+uvicorn
+python-multipart
+pdfplumber
+numpy
