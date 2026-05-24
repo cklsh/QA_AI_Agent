@@ -4,14 +4,14 @@ def parse_prd(prd_text):
     prompt = f"""
 You are a QA system.
 
-TASK:
-Convert PRD into structured test scenarios.
-
 STRICT RULES:
 - Return ONLY valid JSON
-- No explanation
-- Each scenario must have at least 3 steps
-- Include BOTH positive and negative scenarios
+- Use DOUBLE QUOTES only
+- Do NOT include comments
+- Do NOT include explanations
+- Do NOT include non-English characters
+- Do NOT include trailing commas
+- If unsure, return empty JSON structure
 
 FORMAT:
 {{

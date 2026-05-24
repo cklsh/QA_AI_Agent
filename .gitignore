@@ -1,0 +1,95 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.python-version
+
+# Virtual Environment
+venv/
+.env/
+.venv/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.*
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# =========================
+# Jupyter Notebook
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# FastAPI / Runtime
+# =========================
+uploads/
+temp/
+tmp/
+
+# =========================
+# RAG / Vector DB
+# =========================
+rag/faiss.index
+rag/texts.pkl
+
+# =========================
+# Model / Cache
+# =========================
+.cache/
+models/
+hf_cache/
+huggingface/
+
+# Sentence Transformers cache
+sentence_transformers/
+
+# =========================
+# Ollama (optional local artifacts)
+# =========================
+ollama.log
+
+# =========================
+# Testing
+# =========================
+.pytest_cache/
+coverage/
+htmlcov/
+
+# =========================
+# Build / Distribution
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Node / React (future)
+# =========================
+node_modules/
+.next/
+out/
+dist/
+
+# =========================
+# OS Generated Files
+# =========================
+Thumbs.db

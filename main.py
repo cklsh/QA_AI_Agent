@@ -1,42 +1,25 @@
-from modules.parser import parse_prd
-from modules.test_generator import generate_test_cases
-from modules.code_generator import generate_code
-from modules.validator import validate_scenarios
-from utils.json_utils import safe_parse_json
-from rag.knowledge import load_knowledge
+from pipeline import run_pipeline
+from utils.document_loader import load_pdf
+from utils.text_cleaner import clean_text
 
-load_knowledge()
-prd = """
-User can login using email and password.
-If password is incorrect, show error message.
-After 5 failed attempts, account is locked.
-Successful login redirects to dashboard.
-"""
+import json
+import time
 
-print("=== PRD ===")
-print(prd)
+start = time.time()
 
-# Step 1: Parse PRD
-raw_scenarios = parse_prd(prd)
-scenarios = safe_parse_json(raw_scenarios)
+# Load PRD from PDF
+prd_text = load_pdf("documents/sample_prd.pdf")
+prd_text = clean_text(prd_text)
 
-print("\n=== SCENARIOS ===")
-print(scenarios)
+print("PDF length ", len(prd_text))
 
-# Validation
-issues = validate_scenarios(scenarios)
-print("\n=== VALIDATION ===")
-print(issues)
+print("=== EXTRACTED TEXT ===")
+print(prd_text[:1000])  # preview first 1000 chars
 
-# Step 2: Generate Test Cases
-raw_tests = generate_test_cases(raw_scenarios)
-tests = safe_parse_json(raw_tests)
+# Run AI pipeline
+result = run_pipeline(prd_text)
 
-print("\n=== TEST CASES ===")
-print(tests)
+print("\n=== RESULT ===\n")
+print(json.dumps(result, indent=2))
 
-# Step 3: Generate Code
-code = generate_code(raw_tests)
-
-print("\n=== PLAYWRIGHT CODE ===")
-print(code)
+print("\n⏱ Time:", time.time() - start)
