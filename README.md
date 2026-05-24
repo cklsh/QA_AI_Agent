@@ -32,12 +32,42 @@ Optional:
 * FAISS (RAG)
 ---
 
-## Run
+## Setup
+
+### 1. Install Ollama
+
+Download:
+https://ollama.com
+
+---
+
+### 2. Pull model
+
 ```bash
 ollama pull qwen2.5:3b
-pip install ollama pydantic faiss-cpu sentence-transformers
-python main.py
 ```
+
+---
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4. Run API
+
+```bash
+uvicorn api.app:app --reload
+```
+
+---
+
+### 5. Open Swagger Docs
+
+http://127.0.0.1:8000/docs
 ---
 
 ## Example PRD
