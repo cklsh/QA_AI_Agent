@@ -1,35 +1,59 @@
 # AI QA Agent (Runs Locally)
-A mini project that converts PRDs into test cases and Playwright automation code.
-Runs fully locally using Ollama 
+
+A local AI-powered QA assistant that converts PRDs into structured test scenarios and test cases.
+
+Runs fully offline using Ollama (no API keys, no token costs).
+
 ---
 
-## What it does
-Input:
-* PRD (plain text)
+## Features
 
-Output:
-* Test scenarios (JSON)
-* Test cases (positive / negative / edge)
-* Playwright (TypeScript) code
+✅ Upload PRD as PDF
+
+✅ Extract and process document content
+
+✅ Generate structured test scenarios
+
+✅ Generate detailed test cases
+
+✅ Local RAG memory (FAISS)
+
+✅ REST API with FastAPI
+
+🚧 Playwright code generation (Work In Progress)
+
 ---
 
-## Flow
+## Architecture
+
 ```text
-PRD → Scenarios → Test Cases → Playwright Code
+PDF
+ ↓
+Text Extraction
+ ↓
+Text Cleaning
+ ↓
+Chunking
+ ↓
+Scenario Generation
+ ↓
+Test Case Generation
+ ↓
+RAG Memory Storage
 ```
 
-Optional:
-
-```text
-+ RAG (reuse QA knowledge)
-```
 ---
 
-## Tech
-* Python
-* Ollama (local LLM)
-* Qwen 2.5 (7B)
-* FAISS (RAG)
+## Tech Stack
+
+- Python
+- FastAPI
+- Ollama
+- Qwen 2.5 (7B)
+- FAISS
+- Sentence Transformers
+- PDFPlumber
+
 ---
 
 ## Setup
@@ -37,19 +61,20 @@ Optional:
 ### 1. Install Ollama
 
 Download:
+
 https://ollama.com
 
 ---
 
-### 2. Pull model
+### 2. Pull Model
 
 ```bash
-ollama pull qwen2.5:3b
+ollama pull qwen2.5:7b
 ```
 
 ---
 
-### 3. Install dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -65,34 +90,111 @@ uvicorn api.app:app --reload
 
 ---
 
-### 5. Open Swagger Docs
+### 5. Open Swagger UI
 
-http://127.0.0.1:8000/docs
----
-
-## Example PRD
 ```text
-User can login using email and password.
-If password is wrong → show error.
-After 5 failed attempts → lock account.
+http://127.0.0.1:8000/docs
 ```
+
 ---
 
-## Output
-* Structured test scenarios
-* Detailed test cases
-* Playwright test code
+## Available Endpoints
+
+### Generate from Text
+
+```http
+POST /generate
+```
+
+Input:
+
+```json
+{
+  "prd_text": "User can login using email and password."
+}
+```
+
 ---
 
-## Notes
-* Fully offline (no tokens / API)
-* Output quality depends on prompt + model
-* Designed as MVP (not production-ready)
+### Generate from PDF
+
+```http
+POST /generate-pdf
+```
+
+Upload a PRD PDF document.
+
+---
+
+### Ask Questions
+
+```http
+POST /ask
+```
+
+Query previously stored knowledge using RAG.
+
+---
+
+## Example Workflow
+
+```text
+Upload PRD PDF
+ ↓
+AI extracts requirements
+ ↓
+Generate scenarios
+ ↓
+Generate test cases
+ ↓
+Store knowledge in FAISS
+ ↓
+Ask questions about requirements
+```
+
+---
+
+## Example Output
+
+### Scenario
+
+```json
+{
+  "name": "Successful Login",
+  "type": "positive"
+}
+```
+
+### Test Case
+
+```json
+{
+  "title": "Login with Valid Credentials",
+  "steps": [
+    "Navigate to login page",
+    "Enter valid credentials",
+    "Click Login"
+  ],
+  "expected_result": "User is redirected to dashboard"
+}
+```
+
+---
+
+## Current Limitations
+
+- Complex enterprise PRDs may require prompt tuning
+- PDF extraction quality depends on document structure
+- Playwright generation is still under development
+- Local model quality depends on hardware and model size
+
 ---
 
 ## Goal
-Speed up QA work:
-* faster test design
-* faster automation
-* reusable knowledge (RAG)
----
+
+Reduce manual QA effort by helping teams:
+
+- Understand requirements faster
+- Generate test cases quicker
+- Reuse historical QA knowledge
+- Accelerate automation design
