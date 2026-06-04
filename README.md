@@ -8,17 +8,17 @@ Runs fully offline using Ollama (no API keys, no token costs).
 
 ## Features
 
-✅ Upload PRD as PDF
+- Upload PRD as PDF
 
-✅ Extract and process document content
+- Extract and process document content
 
-✅ Generate structured test scenarios
+- Generate structured test scenarios
 
-✅ Generate detailed test cases
+- Generate detailed test cases
 
-✅ Local RAG memory (FAISS)
+- Local RAG memory (FAISS)
 
-✅ REST API with FastAPI
+- REST API with FastAPI
 
 🚧 Playwright code generation (Work In Progress)
 
