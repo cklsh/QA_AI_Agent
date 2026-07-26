@@ -82,12 +82,25 @@ dist/
 *.egg-info/
 
 # =========================
-# Node / React (future)
+# Node / React / Vite
 # =========================
 node_modules/
-.next/
-out/
+
+# Vite build
 dist/
+
+# Vite cache
+.vite/
+
+# Environment variables
+frontend/.env
+frontend/.env.*
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage
+coverage/
 
 # =========================
 # OS Generated Files

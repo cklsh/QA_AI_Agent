@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 
 from pipeline import run_pipeline
 from rag.knowledge import init_knowledge, retrieve_context
@@ -9,6 +10,14 @@ import os
 
 from utils.document_loader import load_pdf
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load RAG memory once
 init_knowledge()
